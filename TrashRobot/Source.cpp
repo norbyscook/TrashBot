@@ -7,8 +7,7 @@ uint32_t number_input();
 uint32_t get_trash_amount();
 bool get_choice();
 char letter_input();
-uint32_t convert_to_score(uint32_t);
-bool within_limit_uint32_t(uint32_t, uint32_t);
+uint32_t uint32_t_multiply(uint32_t, uint32_t);
 
 int main()
 {
@@ -16,32 +15,16 @@ int main()
 		<< "I will record the number of trash you cleaned up today!\n";
 
 	uint32_t trash_amount = { get_trash_amount() };
-	uint32_t score = { convert_to_score(trash_amount) };
+	uint32_t score = { 0 };
 
 	return 0;
 }
 
-uint32_t convert_to_score(uint32_t trash_amount)
-{
-	if (within_limit_uint32_t(0, 0))
-	{
-		return trash_amount * 350 ;
-	}
-	else
-	{
-		return std::numeric_limits<uint32_t>::max();
-	}
-}
 
-bool within_limit_uint32_t(uint32_t original, uint32_t multiple)
-{
-	constexpr uint32_t limit = { std::numeric_limits<uint32_t>::max() };
 
-	if (original * multiple > limit)
-	{
-		return false;
-	}
-	return true;
+uint32_t uint32_t_multiply(uint32_t multiplicand, uint32_t multiplier)
+{
+
 }
 
 uint32_t get_trash_amount()
