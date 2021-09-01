@@ -1,30 +1,52 @@
 #include <iostream>
+#include <fstream>
 
 using std::cin;
 using std::cout;
+using std::endl;
+using std::fstream;
+using std::string;
 
 uint32_t number_input();
 uint32_t get_trash_amount();
-bool get_choice();
+bool choice_input();
 char letter_input();
 uint32_t uint32_t_multiply(uint32_t, uint32_t);
 
 int main()
 {
 	cout << "Hello! I am trash collector bot! <insert track collector bot ascii art>\n"
-		<< "I will record the number of trash you cleaned up today!\n";
+		<< "I will record the number of trash you cleaned up today!" << endl;
+	string file_name = "scores.txt";
+	while (true)
+	{
+		uint32_t trash_amount = { get_trash_amount() };
+		uint32_t score = { uint32_t_multiply(trash_amount, 3) };
 
-	uint32_t trash_amount = { get_trash_amount() };
-	uint32_t score = { 0 };
-
-	return 0;
+		fstream file(file_name);
+		file << score << endl;
+		cout << "score of " << score << "added!" << endl
+			<< "your total score is now: ";
+		file.close();
+	}
 }
 
-
-
+// multiply that checks for overflow
 uint32_t uint32_t_multiply(uint32_t multiplicand, uint32_t multiplier)
 {
-
+	while (true)
+	{
+		uint32_t result_32 = { multiplicand * multiplier };
+		uint64_t result_64 = { uint64_t(multiplicand) * multiplier };
+		if (result_32 == result_64)
+		{
+			return result_32;
+		}
+		else
+		{
+			return std::numeric_limits<uint32_t>::max();
+		}
+	}
 }
 
 uint32_t get_trash_amount()
@@ -38,13 +60,13 @@ uint32_t get_trash_amount()
 
 		cout << "did you input: " << trash_number << "?\n"
 			<< "press y for yes, n for no.\n";
-		correct = { get_choice() };
+		correct = { choice_input() };
 	} while (!correct);
 
 	return trash_number;
 }
 
-bool get_choice()
+bool choice_input()
 {
 	char choice = { letter_input() };
 	while (true)
