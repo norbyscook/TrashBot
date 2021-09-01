@@ -8,43 +8,50 @@ using std::fstream;
 using std::string;
 
 uint32_t number_input();
+uint32_t clamped_multiply(uint32_t multiplicand, uint32_t multiplier, uint32_t limit);
 uint32_t get_trash_amount();
 bool choice_input();
 char letter_input();
-uint32_t uint32_t_multiply(uint32_t, uint32_t);
+uint32_t clamped_multiply(uint32_t, uint32_t, uint32_t);
 
 int main()
 {
-	cout << "Hello! I am trash collector bot! <insert track collector bot ascii art>\n"
-		<< "I will record the number of trash you cleaned up today!" << endl;
+	cout << "Hello! I am trash collector bot!" << endl
+		<< "Lets build a better future together!" << endl
+		<< "<insert track collector bot ascii art>" << endl
+		<< "I will record the number of trash you cleaned up today" << endl
+		<< "and you get to earn points!" << endl;
+
 	string file_name = "scores.txt";
 	while (true)
 	{
 		uint32_t trash_amount = { get_trash_amount() };
-		uint32_t score = { uint32_t_multiply(trash_amount, 3) };
+		uint32_t new_score = { clamped_multiply(trash_amount, 3, 500) };
 
 		fstream file(file_name);
-		file << score << endl;
-		cout << "score of " << score << "added!" << endl
+
+		uint32_t old_score = 0;
+
+		file << new_score << endl;
+		cout << "score of " << new_score << " is added!" << endl
 			<< "your total score is now: ";
 		file.close();
 	}
 }
 
-// multiply that checks for overflow
-uint32_t uint32_t_multiply(uint32_t multiplicand, uint32_t multiplier)
+// multiply that clamps
+uint32_t clamped_multiply(uint32_t multiplicand, uint32_t multiplier, uint32_t limit)
 {
 	while (true)
 	{
 		uint32_t result_32 = { multiplicand * multiplier };
-		uint64_t result_64 = { uint64_t(multiplicand) * multiplier };
-		if (result_32 == result_64)
+		if (result_32 < limit)
 		{
 			return result_32;
 		}
 		else
 		{
-			return std::numeric_limits<uint32_t>::max();
+			return limit;
 		}
 	}
 }
