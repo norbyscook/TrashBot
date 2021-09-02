@@ -14,9 +14,11 @@ using std::ofstream;
 using std::string;
 
 uint32_t number_input();
-uint32_t get_trash_amount();
+uint32_t trash_amount_input();
 bool choice_input();
 char letter_input();
+void override_score_file(const string, uint32_t);
+uint32_t file_score_input(const string);
 void press_enter_to_end();
 uint32_t limited_add(uint32_t, uint32_t);
 uint32_t limited_multiply(uint32_t, uint32_t);
@@ -32,20 +34,9 @@ int main()
 
 	constexpr char file_path[] = "scores.txt";
 
-	uint32_t trash_amount = { get_trash_amount() };
+	uint32_t trash_amount = { trash_amount_input() };
 	uint32_t new_score = { clamp(limited_multiply(trash_amount, 3), 500) };
-
-	uint32_t file_score = 0;
-
-	// read data from file
-	ifstream in_file(file_path);
-	if (!in_file)
-	{
-		cout << "I will create a file called: " << file_path << "\n"
-			<< "this is where we will keep our scores!\n";
-	}
-	else { in_file >> file_score; }
-	in_file.close();
+	uint32_t file_score = { file_score_input(file_path) };
 		
 	// update score
 	cout << "score of " << new_score << " is added!\n";
@@ -58,14 +49,37 @@ int main()
 	}
 
 	// update file data
-	ofstream out_file(file_path);
-	if (!out_file) { cout << "I can't create the file!" << "\n"; }
-	else { out_file << new_score; }
-	out_file.close();
+	override_score_file(file_path, new_score);
 
 	// end program 
 	cout << "that is all for now! Come again! Thank you! :D" << "\n";
 	press_enter_to_end();
+}
+
+// create file if empty and override data in file
+void override_score_file(const string file_path, uint32_t new_data)
+{
+	ofstream out_file(file_path);
+	if (!out_file) { cout << "I can't create the file!" << "\n"; }
+	else { out_file << new_data; }
+	out_file.close();
+}
+
+uint32_t file_score_input(const string file_path)
+{
+	uint32_t file_score = 0;
+	// read data from file
+	ifstream in_file(file_path);
+	if (!in_file)
+	{
+		cout << "I will create a file called: " << file_path << "\n"
+			<< "this is where we will keep our scores!\n";
+		// initiate file to 0
+		override_score_file(file_path, 0);
+	}
+	else { in_file >> file_score; }
+	in_file.close();
+	return file_score;
 }
 
 void press_enter_to_end()
@@ -92,7 +106,8 @@ uint32_t clamp(uint32_t num, uint32_t upper)
 	return num > upper ? upper : num;
 }
 
-uint32_t get_trash_amount()
+// get trash amount from user
+uint32_t trash_amount_input()
 {
 	bool correct = { false };
 	uint32_t trash_number = { 0 };
