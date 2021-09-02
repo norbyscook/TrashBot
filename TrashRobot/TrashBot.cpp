@@ -1,21 +1,26 @@
+/*
+* source code insperations: 
+	* https://stackoverflow.com/questions/427477/fastest-way-to-clamp-a-real-fixed-floating-point-value
+	* https://www.tutorialspoint.com/cplusplus/cpp_conditional_operator.htm
+*/
+
 #include <iostream>
 #include <fstream>
-#include <algorithm>
 
 using std::cin;
 using std::cout;
 using std::ifstream;
 using std::ofstream;
 using std::string;
-using std::clamp;
 
 uint32_t number_input();
-uint32_t clamped_multiply(uint32_t, uint32_t, uint32_t);
 uint32_t get_trash_amount();
 bool choice_input();
 char letter_input();
-uint32_t clamped_multiply(uint32_t, uint32_t, uint32_t);
+uint32_t clamp(uint32_t, uint32_t, uint32_t);
 void press_enter_to_end();
+uint32_t limited_add(uint32_t, uint32_t);
+
 
 int main()
 {
@@ -25,10 +30,10 @@ int main()
 		<< "I will record the number of trash you cleaned up today\n"
 		<< "and you get to earn points!\n";
 
-	string file_path = "scores.txt";
+	constexpr char file_path[] = "scores.txt";
 
 	uint32_t trash_amount = { get_trash_amount() };
-	uint32_t new_score = {  };
+	uint32_t new_score = { clamp(trash_amount * 3, 0, 500) };
 
 	uint32_t file_score = 0;
 
@@ -44,7 +49,7 @@ int main()
 		
 	// update score
 	cout << "score of " << new_score << " is added!\n";
-	new_score += file_score;
+	new_score = limited_add(new_score, file_score);
 	cout << "your total score is now: " << new_score << "\n";
 
 	// update file data
@@ -54,7 +59,7 @@ int main()
 	out_file.close();
 
 	// end program 
-	cout << "that is all for now! Thank you! :D" << "\n";
+	cout << "that is all for now! Come again! Thank you! :D" << "\n";
 	press_enter_to_end();
 }
 
@@ -64,11 +69,16 @@ void press_enter_to_end()
 	cin.ignore(1000, '\n');
 }
 
+uint32_t limited_add(uint32_t addend_one, uint32_t addend_two)
+{
+	constexpr uint32_t limit = std::numeric_limits<uint32_t>::max();
+	return limit - addend_one > addend_two ? addend_one + addend_two : limit;
+}
 
-// multiply that clamps to score limit
 uint32_t clamp(uint32_t num, uint32_t lower, uint32_t upper)
 {
-	
+	uint32_t low_clamped = num < lower ? lower : num;
+	return low_clamped > upper ? upper : low_clamped;
 }
 
 uint32_t get_trash_amount()
