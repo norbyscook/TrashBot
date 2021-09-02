@@ -17,10 +17,10 @@ uint32_t number_input();
 uint32_t get_trash_amount();
 bool choice_input();
 char letter_input();
-uint32_t clamp(uint32_t, uint32_t, uint32_t);
 void press_enter_to_end();
 uint32_t limited_add(uint32_t, uint32_t);
-
+uint32_t limited_multiply(uint32_t, uint32_t);
+uint32_t clamp(uint32_t num, uint32_t upper);
 
 int main()
 {
@@ -28,12 +28,12 @@ int main()
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< "<insert track collector bot ascii art>\n"
 		<< "I will record the number of trash you cleaned up today\n"
-		<< "and you get to earn points!\n";
+		<< "and you get to earn points based on the number of trash you cleaned!\n";
 
 	constexpr char file_path[] = "scores.txt";
 
 	uint32_t trash_amount = { get_trash_amount() };
-	uint32_t new_score = { clamp(trash_amount * 3, 0, 500) };
+	uint32_t new_score = { clamp(limited_multiply(trash_amount, 3), 500) };
 
 	uint32_t file_score = 0;
 
@@ -51,6 +51,11 @@ int main()
 	cout << "score of " << new_score << " is added!\n";
 	new_score = limited_add(new_score, file_score);
 	cout << "your total score is now: " << new_score << "\n";
+
+	if (new_score == std::numeric_limits<uint32_t>::max())
+	{
+		cout << "WOW, you have reached the max amount of points!!\n";
+	}
 
 	// update file data
 	ofstream out_file(file_path);
@@ -75,10 +80,16 @@ uint32_t limited_add(uint32_t addend_one, uint32_t addend_two)
 	return limit - addend_one > addend_two ? addend_one + addend_two : limit;
 }
 
-uint32_t clamp(uint32_t num, uint32_t lower, uint32_t upper)
+uint32_t limited_multiply(uint32_t multiplicand, uint32_t multiplier)
 {
-	uint32_t low_clamped = num < lower ? lower : num;
-	return low_clamped > upper ? upper : low_clamped;
+	uint32_t result_32 = { multiplicand * multiplier };
+	uint64_t result_64 = { uint64_t(multiplicand) * multiplier };
+	return result_32 == result_64 ? result_32 : std::numeric_limits<uint32_t>::max();
+}
+
+uint32_t clamp(uint32_t num, uint32_t upper)
+{
+	return num > upper ? upper : num;
 }
 
 uint32_t get_trash_amount()
