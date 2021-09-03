@@ -1,8 +1,5 @@
 /*
 * trash bot app that collect points based on trash collection IRL!
-* code insperations: 
-	* https://stackoverflow.com/questions/427477/fastest-way-to-clamp-a-real-fixed-floating-point-value
-	* https://www.tutorialspoint.com/cplusplus/cpp_conditional_operator.htm
 */
 
 #include <iostream>
@@ -69,6 +66,7 @@ int main()
 		{
 			// end program 
 			cout << "that is all for now! Come again! Thank you! :D" << "\n";
+			press_enter_to_end();
 			break;
 		}
 		else
@@ -76,7 +74,6 @@ int main()
 			cout << "please retry input\n";
 		}
 	}
-	press_enter_to_end();
 	return 0;
 }
 
