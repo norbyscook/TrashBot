@@ -23,7 +23,9 @@ void update_file_score(uint32_t, const char[]);
 bool choice_input();
 char letter_input();
 string string_input();
-// data type functions
+bool valid_score_input(string);
+bool is_intended_score(uint32_t);
+// data type check functions
 bool is_int_str(string input);
 // file functions
 void override_file(const string, uint32_t);
@@ -41,31 +43,37 @@ int main()
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< "<insert track collector bot ascii art>\n"
 		<< "I will record the number of trash you cleaned up today\n"
-		<< "and you get to earn points based on the number of trash you cleaned!\n\n"
-		<< "enter a number to record trash, enter 'score' to display current score\n";
+		<< "and you get to earn points based on the number of trash you cleaned!\n\n";
 
 	constexpr char file_path[] = "scores.txt";
 	while (true)
 	{
+		cout << "enter a number to record trash, enter 'score' to display current score\n"
+			<< "enter 'e' to end program\n";
+
 		string input = string_input();
-		if (is_int_str(input))
+		if (valid_score_input(input))
 		{
 			update_file_score(stoul(input), file_path);
 		}
 		else if (input == "score")
 		{
-			cout << "your current score is: " << get_file_score(file_path) << "\n";
+			uint32_t score = get_file_score(file_path);
+			cout << "your current score is: " << score << "\n";
+		}
+		else if (input == "e")
+		{
+			// end program 
+			cout << "that is all for now! Come again! Thank you! :D" << "\n";
+			break;
 		}
 		else
 		{
-			cout << "unkown input\n"
-				<< "enter a number to record trash, enter 'score' to display current score\n";
+			cout << "please retry input\n";
 		}
 	}
-	
-	// end program 
-	cout << "that is all for now! Come again! Thank you! :D" << "\n";
 	press_enter_to_end();
+	return 0;
 }
 
 // main score functions ------------------------
@@ -136,7 +144,26 @@ string string_input()
 	return input;
 }
 
-// data type functions ------------------------
+bool valid_score_input(string input)
+{
+	if (is_int_str(input))
+	{
+		return is_intended_score(stoul(input));
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool is_intended_score(uint32_t input)
+{
+	cout << "did you input: " << input << "?\n"
+		<< "press y for yes, n for no.\n";
+	return  choice_input();
+}
+
+// data type check functions ------------------------
 
 bool is_int_str(string input)
 {
