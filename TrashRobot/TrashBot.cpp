@@ -1,5 +1,6 @@
 /*
-* source code insperations: 
+* trash bot app that collect points based on trash collection IRL!
+* code insperations: 
 	* https://stackoverflow.com/questions/427477/fastest-way-to-clamp-a-real-fixed-floating-point-value
 	* https://www.tutorialspoint.com/cplusplus/cpp_conditional_operator.htm
 */
