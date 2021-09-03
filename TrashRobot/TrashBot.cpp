@@ -43,13 +43,13 @@ int main()
 	cout << "Hello! I am trash collector bot!\n"
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< get_ascii_art(trash_art_file_path)
-		<< "I will record the number of trash you cleaned up today\n"
-		<< "and you get to earn points based on the number of trash you cleaned!\n\n";
+		<< "every time you recycle or put away a peice of trash in real life, remember to come and log it here!\n"
+		<< "you will gain points each time you log it! The more points the better!\n\n";
 
 	constexpr char score_file_path[] = "scores.txt";
 	while (true)
 	{
-		cout << "enter a number to record trash, enter 'score' to display current score\n"
+		cout << "enter a number to record the number of trash you put away today, enter 'score' to display current score\n"
 			<< "enter 'e' to end program\n";
 
 		string input = string_input();
@@ -208,7 +208,7 @@ string get_ascii_art(const string file_path)
 	string output = "";
 	if (!in_file)
 	{
-		cout << "file not found\n";
+		cout << "art file not found\n";
 		override_file(file_path, 0);
 	}
 	else
