@@ -6,23 +6,34 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <sstream>
 
 using std::cin;
 using std::cout;
 using std::ifstream;
 using std::ofstream;
 using std::string;
+using std::stringstream;
+using std::stoul;
 
-uint32_t number_input();
-uint32_t trash_amount_input();
+// main score functions
+void update_file_score(uint32_t, const char[]);
+// input functions
 bool choice_input();
 char letter_input();
-void override_score_file(const string, uint32_t);
-uint32_t file_score_input(const string);
-void press_enter_to_end();
+string string_input();
+// data type functions
+bool is_int_str(string input);
+// file functions
+void override_file(const string, uint32_t);
+uint32_t get_file_score(const string);
+// math functions
 uint32_t limited_add(uint32_t, uint32_t);
 uint32_t limited_multiply(uint32_t, uint32_t);
 uint32_t clamp(uint32_t num, uint32_t upper);
+// program end functions
+void press_enter_to_end();
 
 int main()
 {
@@ -30,14 +41,41 @@ int main()
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< "<insert track collector bot ascii art>\n"
 		<< "I will record the number of trash you cleaned up today\n"
-		<< "and you get to earn points based on the number of trash you cleaned!\n";
+		<< "and you get to earn points based on the number of trash you cleaned!\n\n"
+		<< "enter a number to record trash, enter 'score' to display current score\n";
 
 	constexpr char file_path[] = "scores.txt";
+	while (true)
+	{
+		string input = string_input();
+		if (is_int_str(input))
+		{
+			update_file_score(stoul(input), file_path);
+		}
+		else if (input == "score")
+		{
+			cout << "your current score is: " << get_file_score(file_path) << "\n";
+		}
+		else
+		{
+			cout << "unkown input\n"
+				<< "enter a number to record trash, enter 'score' to display current score\n";
+		}
+	}
+	
+	// end program 
+	cout << "that is all for now! Come again! Thank you! :D" << "\n";
+	press_enter_to_end();
+}
 
-	uint32_t trash_amount = { trash_amount_input() };
+// main score functions ------------------------
+
+void update_file_score(uint32_t input, const char file_path[])
+{
+	uint32_t trash_amount = { input };
 	uint32_t new_score = { clamp(limited_multiply(trash_amount, 3), 500) };
-	uint32_t file_score = { file_score_input(file_path) };
-		
+	uint32_t file_score = { get_file_score(file_path) };
+
 	// update score
 	cout << "score of " << new_score << " is added!\n";
 	new_score = limited_add(new_score, file_score);
@@ -45,84 +83,14 @@ int main()
 
 	if (new_score == std::numeric_limits<uint32_t>::max())
 	{
-		cout << "WOW, you have reached the max amount of points!!\n";
+		cout << "WOW, you have reached the max amount of scores!!\n";
 	}
 
 	// update file data
-	override_score_file(file_path, new_score);
-
-	// end program 
-	cout << "that is all for now! Come again! Thank you! :D" << "\n";
-	press_enter_to_end();
+	override_file(file_path, new_score);
 }
 
-// create file if empty and override data in file
-void override_score_file(const string file_path, uint32_t new_data)
-{
-	ofstream out_file(file_path);
-	if (!out_file) { cout << "I can't create the file!" << "\n"; }
-	else { out_file << new_data; }
-	out_file.close();
-}
-
-uint32_t file_score_input(const string file_path)
-{
-	uint32_t file_score = 0;
-	// read data from file
-	ifstream in_file(file_path);
-	if (!in_file)
-	{
-		cout << "I will create a file called: " << file_path << "\n"
-			<< "this is where we will keep our scores!\n";
-		// initiate file to 0
-		override_score_file(file_path, 0);
-	}
-	else { in_file >> file_score; }
-	in_file.close();
-	return file_score;
-}
-
-void press_enter_to_end()
-{
-	cout << "press enter to end\n";
-	cin.ignore(1000, '\n');
-}
-
-uint32_t limited_add(uint32_t addend_one, uint32_t addend_two)
-{
-	constexpr uint32_t limit = std::numeric_limits<uint32_t>::max();
-	return limit - addend_one > addend_two ? addend_one + addend_two : limit;
-}
-
-uint32_t limited_multiply(uint32_t multiplicand, uint32_t multiplier)
-{
-	uint32_t result_32 = { multiplicand * multiplier };
-	uint64_t result_64 = { uint64_t(multiplicand) * multiplier };
-	return result_32 == result_64 ? result_32 : std::numeric_limits<uint32_t>::max();
-}
-
-uint32_t clamp(uint32_t num, uint32_t upper)
-{
-	return num > upper ? upper : num;
-}
-
-// get trash amount from user
-uint32_t trash_amount_input()
-{
-	bool correct = { false };
-	uint32_t trash_number = { 0 };
-	do
-	{
-		cout << "enter your number: ";
-		trash_number = { number_input() };
-
-		cout << "did you input: " << trash_number << "?\n"
-			<< "press y for yes, n for no.\n";
-		correct = { choice_input() };
-	} while (!correct);
-
-	return trash_number;
-}
+// input functions ------------------------
 
 bool choice_input()
 {
@@ -155,15 +123,81 @@ char letter_input()
 	return character;
 }
 
-uint32_t number_input()
+string string_input()
 {
-	uint32_t number = { 0 };
-	while (!(cin >> number))
+	string input = { "" };
+	while (!(cin >> input))
 	{
-		cout << "invalid number input\n";
+		cout << "invalid string input\n";
 		cin.clear();
 		cin.ignore(1000, '\n');
 	}
 	cin.ignore(1000, '\n');
-	return number;
+	return input;
+}
+
+// data type functions ------------------------
+
+bool is_int_str(string input)
+{
+	stringstream chk_stream(input);
+	uint32_t num = 0;
+	return bool(chk_stream >> num);
+}
+
+
+// file functions ------------------------
+
+// create file if empty and override data in file
+void override_file(const string file_path, uint32_t new_data)
+{
+	ofstream out_file(file_path);
+	if (!out_file) { cout << "I can't create the file!" << "\n"; }
+	else { out_file << new_data; }
+	out_file.close();
+}
+
+uint32_t get_file_score(const string file_path)
+{
+	uint32_t file_score = 0;
+	// read data from file
+	ifstream in_file(file_path);
+	if (!in_file)
+	{
+		cout << "I will create a file called: " << file_path << "\n"
+			<< "this is where we will keep our scores!\n";
+		// initiate file to 0
+		override_file(file_path, 0);
+	}
+	else { in_file >> file_score; }
+	in_file.close();
+	return file_score;
+}
+
+// math functions ------------------------
+
+uint32_t limited_add(uint32_t addend_one, uint32_t addend_two)
+{
+	constexpr uint32_t limit = std::numeric_limits<uint32_t>::max();
+	return limit - addend_one > addend_two ? addend_one + addend_two : limit;
+}
+
+uint32_t limited_multiply(uint32_t multiplicand, uint32_t multiplier)
+{
+	uint32_t result_32 = { multiplicand * multiplier };
+	uint64_t result_64 = { uint64_t(multiplicand) * multiplier };
+	return result_32 == result_64 ? result_32 : std::numeric_limits<uint32_t>::max();
+}
+
+uint32_t clamp(uint32_t num, uint32_t upper)
+{
+	return num > upper ? upper : num;
+}
+
+// program end functions ------------------------
+
+void press_enter_to_end()
+{
+	cout << "press enter to end\n";
+	cin.ignore(1000, '\n');
 }
