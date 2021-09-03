@@ -16,6 +16,7 @@ using std::ofstream;
 using std::string;
 using std::stringstream;
 using std::stoul;
+using std::getline;
 
 // main score functions
 void update_file_score(uint32_t, const char[]);
@@ -30,6 +31,7 @@ bool is_int_str(string input);
 // file functions
 void override_file(const string, uint32_t);
 uint32_t get_file_score(const string);
+string get_ascii_art(const string);
 // math functions
 uint32_t limited_add(uint32_t, uint32_t);
 uint32_t limited_multiply(uint32_t, uint32_t);
@@ -39,13 +41,14 @@ void press_enter_to_end();
 
 int main()
 {
+	constexpr char trash_art_file_path[] = "TrashBotArt.txt";
 	cout << "Hello! I am trash collector bot!\n"
 		<< "Lets build a better future together by eliminating them trashes!\n"
-		<< "<insert track collector bot ascii art>\n"
+		<< get_ascii_art(trash_art_file_path)
 		<< "I will record the number of trash you cleaned up today\n"
 		<< "and you get to earn points based on the number of trash you cleaned!\n\n";
 
-	constexpr char file_path[] = "scores.txt";
+	constexpr char score_file_path[] = "scores.txt";
 	while (true)
 	{
 		cout << "enter a number to record trash, enter 'score' to display current score\n"
@@ -54,11 +57,11 @@ int main()
 		string input = string_input();
 		if (valid_score_input(input))
 		{
-			update_file_score(stoul(input), file_path);
+			update_file_score(stoul(input), score_file_path);
 		}
 		else if (input == "score")
 		{
-			uint32_t score = get_file_score(file_path);
+			uint32_t score = get_file_score(score_file_path);
 			cout << "your current score is: " << score << "\n";
 		}
 		else if (input == "e")
@@ -199,6 +202,28 @@ uint32_t get_file_score(const string file_path)
 	else { in_file >> file_score; }
 	in_file.close();
 	return file_score;
+}
+
+string get_ascii_art(const string file_path)
+{
+	ifstream in_file(file_path);
+	string output = "";
+	if (!in_file)
+	{
+		cout << "file not found\n";
+		override_file(file_path, 0);
+	}
+	else
+	{
+		
+		string line = "";
+		while (getline(in_file, line))
+		{
+			output += line + "\n";
+		}
+	}
+	return output;
+	in_file.close();
 }
 
 // math functions ------------------------
