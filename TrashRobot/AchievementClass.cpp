@@ -1,6 +1,7 @@
 #include "AchievementClass.h"
 
+// load achievements into vector
 void Achievements_cl::load_achievements()
 {
-	achievements.push_back({ 23, "achieve.txt", 1 });
+	ifstream in_file("Achievement_Log.txt");
 }

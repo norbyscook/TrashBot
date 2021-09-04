@@ -14,7 +14,7 @@ int main()
 		<< "every time you recycle or put away a peice of trash in real life, remember to come and log it here!\n"
 		<< "you will gain points each time you log it! The more points the better!\n\n";
 
-	constexpr char score_file_path[] = "scores.txt";
+	constexpr char score_file_path[] = "Scores.txt";
 	while (true)
 	{
 		cout << "enter a number to record the number of trash you put away today, enter 'score' to display current score\n"

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 
+using std::ifstream;
 using std::vector;
 using std::string;
 
