@@ -31,9 +31,10 @@ void update_file_score(uint32_t new_score, const char file_path[])
 
 bool choice_input()
 {
-	char choice = { letter_input() };
+	char choice = { 0 };
 	while (true)
 	{
+		choice = { letter_input() };
 		switch (choice)
 		{
 		case 'y':
