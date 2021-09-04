@@ -3,6 +3,7 @@
 */
 
 #include "TrashBotFunctions.h"
+#include "AchievementClass.h"
 
 int main()
 {
@@ -23,6 +24,8 @@ int main()
 		if (valid_score_input(input))
 		{
 			update_file_score(stoul(input), score_file_path);
+			Achievements_cl Achievement;
+			Achievement.load_achievements();
 		}
 		else if (input == "score")
 		{
