@@ -1,0 +1,5 @@
+score, path, status
+12, path1.txt, 0
+13, path2.txt, 0
+14, path3.txt, 0
+15, path4.txt, 0

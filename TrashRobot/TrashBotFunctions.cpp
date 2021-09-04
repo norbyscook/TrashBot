@@ -132,8 +132,7 @@ string get_ascii_art(const string file_path)
 	string output = "";
 	if (!in_file)
 	{
-		cout << "art file not found\n";
-		override_file(file_path, 0);
+		cout << "I can't find robot art file! in" << file_path << "\n";
 	}
 	else
 	{

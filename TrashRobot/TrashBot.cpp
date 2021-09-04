@@ -8,6 +8,9 @@
 int main()
 {
 	constexpr char trash_art_file_path[] = "Assets/TrashBotArt.txt";
+			
+	Achievements_cl Achievement;
+	Achievement.load_achievements();
 	cout << "Hello! I am trash collector bot!\n"
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< get_ascii_art(trash_art_file_path)
@@ -24,8 +27,7 @@ int main()
 		if (valid_score_input(input))
 		{
 			update_file_score(stoul(input), score_file_path);
-			Achievements_cl Achievement;
-			Achievement.load_achievements();
+
 		}
 		else if (input == "score")
 		{
