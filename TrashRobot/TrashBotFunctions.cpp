@@ -2,10 +2,15 @@
 
 // main score functions ------------------------------------------
 
-void update_file_score(uint32_t input, const char file_path[])
+// calculate score based on trash amount
+uint32_t calculate_score(uint32_t trash_amount)
 {
-	uint32_t trash_amount = { input };
-	uint32_t new_score = { clamp(limited_multiply(trash_amount, 3), 500) };
+	return clamp(limited_multiply(trash_amount, 3), 500);
+}
+
+void update_file_score(uint32_t new_score, const char file_path[])
+{
+
 	uint32_t file_score = { get_file_score(file_path) };
 
 	// update score
@@ -98,7 +103,6 @@ bool is_int_str(string input)
 
 // score file functions ------------------------------------------
 
-// create file if empty and override data in file
 void override_file(const string file_path, uint32_t new_data)
 {
 	ofstream out_file(file_path);

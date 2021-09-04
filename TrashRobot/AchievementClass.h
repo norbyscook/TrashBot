@@ -5,10 +5,12 @@
 #include <sstream>
 
 using std::ifstream;
+using std::ofstream;
 using std::vector;
 using std::string;
 using std::cout;
 using std::istream;
+using std::ostream;
 using std::getline;
 using std::stringstream;
 using std::stoul;
@@ -24,8 +26,19 @@ class Achievements_cl
 {
 public:
 	vector<achieve> achievements;
-	void load_achievements();
+	// loads achievement into member vector
+	void load_achievements(string);
+	// update status achievement in vector
+	void update_achievements_status(uint32_t score);
+	// write updated achievements to file
+	void write_achievements_status_to_file(string);
 
 private:
-	vector<achieve> update_achievement_vect(istream&);
+	// loading functions 
+
+	// extract a line of the csv file
+	vector<achieve> extract_line(istream&);
+	// extract cells of the line and place it into achievement vector
+	void extract_cell(std::string, std::vector<achieve>&);
+	void write_to_file(ostream& out_file);
 };

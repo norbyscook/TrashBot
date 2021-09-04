@@ -1,37 +1,73 @@
 #include "AchievementClass.h"
 
-// load achievements into vector
-void Achievements_cl::load_achievements()
+// achievements loading functions ----------------------------------------
+
+void Achievements_cl::load_achievements(string file_path)
 {
-	string file_path = "Assets/AchievementsLog.txt";
 	ifstream in_file(file_path);
-	if (!in_file)
-	{
-		cout << "I can't find achievement log file! in" << file_path << "\n";
-	}
-	else
-	{
-		achievements = update_achievement_vect(in_file);
-	}
+	if (!in_file) { cout << "I can't find achievement log file! in" << file_path << "\n"; }
+	else { achievements = extract_line(in_file); }
 	in_file.close();
 }
 
-vector<achieve> Achievements_cl::update_achievement_vect(istream& in_file)
+vector<achieve> Achievements_cl::extract_line(istream& in_file)
 {
-	vector<string> line_elements(3);
+	
 	vector<achieve> vect;
 	string line = { "" };
 	getline(in_file, line);
 	while (getline(in_file, line))
 	{
-		stringstream line_stream(line);
-		string cell = { "" };
-		for (size_t i = 0; getline(line_stream, cell, ','); i++)
-		{
-			try { line_elements.at(i) = cell; }
-			catch (std::out_of_range oor) { cout << oor.what() << "\n"; }
-		}
-		vect.push_back({ stoul(line_elements[0]), line_elements[1], bool(stoul(line_elements[2])) });
+		extract_cell(line, vect);
 	}
 	return vect;
+}
+
+void Achievements_cl::extract_cell(std::string line, std::vector<achieve>& vect)
+{
+	vector<string> line_elements(3);
+	stringstream line_stream(line);
+	string cell = { "" };
+	for (size_t i = 0; getline(line_stream, cell, ','); i++)
+	{
+		try { line_elements.at(i) = cell; }
+		catch (std::out_of_range oor) { cout << oor.what() << "\n"; }
+	}
+	vect.push_back({ stoul(line_elements[0]), line_elements[1], bool(stoul(line_elements[2])) });
+}
+
+// data structure functions ----------------------------------------
+
+void Achievements_cl::update_achievements_status(uint32_t score)
+{
+	for (auto& element : achievements)
+	{
+		if (score >= element.score_requirement)
+		{
+			cout << "!!! you have obtained a new achievement !!!\n";
+			element.obtained = true;
+		}
+	}
+}
+
+// file write functions  ----------------------------------------
+
+void Achievements_cl::write_achievements_status_to_file(string file_path)
+{
+	ofstream out_file(file_path);
+	string line = { "" };
+	if (!out_file) { cout << "can't find " << file_path << "\n"; }
+	else { write_to_file(out_file); }
+	out_file.close();
+}
+
+void Achievements_cl::write_to_file(ostream& out_file)
+{
+	out_file << "score, path, status\n";
+	for (auto element : achievements)
+	{
+		out_file << element.score_requirement << ",";
+		out_file << element.file_path << ",";
+		out_file << element.obtained << "\n";
+	}
 }
