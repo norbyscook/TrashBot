@@ -114,7 +114,7 @@ uint32_t get_file_score(const string file_path)
 	ifstream in_file(file_path);
 	if (!in_file)
 	{
-		cout << "I will create a file called: " << file_path << "\n"
+		cout << "I will create a file located at: " << file_path << "\n"
 			<< "this is where we will keep our scores!\n";
 		// initiate file to 0
 		override_file(file_path, 0);

@@ -7,14 +7,14 @@
 
 int main()
 {
-	constexpr char trash_art_file_path[] = "TrashBotArt.txt";
+	constexpr char trash_art_file_path[] = "Assets/TrashBotArt.txt";
 	cout << "Hello! I am trash collector bot!\n"
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< get_ascii_art(trash_art_file_path)
 		<< "every time you recycle or put away a peice of trash in real life, remember to come and log it here!\n"
 		<< "you will gain points each time you log it! The more points the better!\n\n";
 
-	constexpr char score_file_path[] = "Scores.txt";
+	constexpr char score_file_path[] = "Assets/Scores.txt";
 	while (true)
 	{
 		cout << "enter a number to record the number of trash you put away today, enter 'score' to display current score\n"
