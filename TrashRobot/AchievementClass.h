@@ -15,16 +15,17 @@ struct achieve
 class Achievements_cl
 {
 public:
+
 	vector<achieve> achievements;
 
-	// loads achievement into vector
+	// loads achievement from file into vector
 	void load(string);
 	// update status of achievement in vector
 	void update_status(uint32_t score);
-	// write updated achievements to file
-	void update_file(string);
 	// get obtained achievements
 	string get_obtained();
+	// write updated achievements to file
+	void update_file(string);
 
 private:
 	// achievements loading functions ----------------------------------------
