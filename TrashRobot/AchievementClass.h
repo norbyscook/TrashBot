@@ -34,7 +34,7 @@ public:
 	// update status of achievement in vector
 	void update_status(uint32_t score);
 	// write updated achievements to file
-	void write_achievements_status_to_file(string);
+	void update_file(string);
 	// view achievements
 	string get_obtained();
 

@@ -36,7 +36,7 @@ void Achievements_cl::extract_cell(std::string line, std::vector<achieve>& vect)
 	vect.push_back({ stoul(line_elements[0]), line_elements[1], bool(stoul(line_elements[2])) });
 }
 
-// data structure functions ----------------------------------------
+// status update functions ----------------------------------------
 
 void Achievements_cl::update_status(uint32_t score)
 {
@@ -44,7 +44,10 @@ void Achievements_cl::update_status(uint32_t score)
 	{
 		if (score >= element.score_requirement)
 		{
-			cout << "!!! you have obtained a new achievement !!!\n";
+			if (element.status == false) 
+			{
+				cout << "!!! you have obtained a new achievement !!!\n"; 
+			}
 			element.status = true;
 		}
 	}
@@ -52,7 +55,7 @@ void Achievements_cl::update_status(uint32_t score)
 
 // file write functions  ----------------------------------------
 
-void Achievements_cl::write_achievements_status_to_file(string file_path)
+void Achievements_cl::update_file(string file_path)
 {
 	ofstream out_file(file_path);
 	string line = { "" };

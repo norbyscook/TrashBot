@@ -31,6 +31,7 @@ int main()
 			uint32_t new_score = calculate_new_score(stoul(input), score_file_path);
 			update_file_score(new_score, score_file_path);
 			achievements.update_status(new_score);
+			achievements.update_file(achievement_file_path);
 		}
 		else if (input == "score")
 		{
@@ -45,8 +46,8 @@ int main()
 		}
 		else if (input == "a")
 		{
-			cout << "here are our achievements so far: \n"
-				<< achievements.get_obtained();
+			cout << "here are our achievements so far: \n";
+			cout << achievements.get_obtained();
 		}
 		else
 		{
@@ -54,7 +55,6 @@ int main()
 		}
 	}
 
-	achievements.write_achievements_status_to_file(achievement_file_path);
 	press_enter_to_end();
 	return 0;
 }
