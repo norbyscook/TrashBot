@@ -3,21 +3,21 @@
 // main score functions ------------------------------------------
 
 // calculate score based on trash amount
-uint32_t calculate_score(uint32_t trash_amount)
+uint32_t calculate_new_score(uint32_t trash_amount, const char file_path[])
 {
-	return clamp(limited_multiply(trash_amount, 3), 500);
+	uint32_t new_score = { clamp(limited_multiply(trash_amount, 3), 500) };
+
+	cout << "score of " << new_score << " is added!\n";
+	// add file score to new score
+	uint32_t file_score = { get_file_score(file_path) };
+	new_score = limited_add(new_score, file_score);
+	cout << "your total score is now: " << new_score << "\n";
+
+	return new_score;
 }
 
 void update_file_score(uint32_t new_score, const char file_path[])
 {
-
-	uint32_t file_score = { get_file_score(file_path) };
-
-	// update score
-	cout << "score of " << new_score << " is added!\n";
-	new_score = limited_add(new_score, file_score);
-	cout << "your total score is now: " << new_score << "\n";
-
 	if (new_score == std::numeric_limits<uint32_t>::max())
 	{
 		cout << "WOW, you have reached the max amount of scores!!\n";

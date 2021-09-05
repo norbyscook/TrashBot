@@ -26,7 +26,7 @@ int main()
 		string input = string_input();
 		if (valid_score_input(input))
 		{
-			uint32_t new_score = calculate_score(stoul(input));
+			uint32_t new_score = calculate_new_score(stoul(input), score_file_path);
 			update_file_score(new_score, score_file_path);
 			achievements.update_achievements_status(new_score);
 		}

@@ -14,7 +14,7 @@ using std::getline;
 
 // main score functions ------------------------------
 
-uint32_t calculate_score(uint32_t);
+uint32_t calculate_new_score(uint32_t, const char[]);
 void update_file_score(uint32_t, const char[]);
 
 // input functions ------------------------------
