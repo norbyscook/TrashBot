@@ -16,13 +16,15 @@ int main()
 		<< "Lets build a better future together by eliminating them trashes!\n"
 		<< get_ascii_art(trash_art_file_path) << "\n\n"
 		<< "every time you recycle or put away a peice of trash in real life, remember to come and log it here!\n"
-		<< "you will gain points each time you log it! The more points the better!\n\n";
+		<< "you will gain points each time you log it! The more points the better!\n"
+		<< "There are two achievements you can get based on the number of scores we got!\n\n";
 
 	constexpr char score_file_path[] = "Assets/Scores.txt";
 	while (true)
 	{
-		cout << "enter a number to record the number of trash you put away today, enter 'score' to display current score\n"
-			<< "ender 'a' to view our achievements!"
+		cout << "enter a number to record the number of trash you put away today\n"
+			<< "enter 'score' to display current score\n"
+			<< "ender 'a' to view our achievements!\n"
 			<< "enter 'e' to end program\n\n";
 
 		string input = string_input();

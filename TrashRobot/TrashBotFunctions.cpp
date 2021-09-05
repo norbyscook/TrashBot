@@ -107,7 +107,7 @@ bool is_int_str(string input)
 void override_file(const string file_path, uint32_t new_data)
 {
 	ofstream out_file(file_path);
-	if (!out_file) { cout << "I can't create the file!" << "\n"; }
+	if (!out_file) { cout << "I can't create and write the file! at " << file_path << "\n"; }
 	else { out_file << new_data; }
 	out_file.close();
 }
@@ -119,8 +119,6 @@ uint32_t get_file_score(const string file_path)
 	ifstream in_file(file_path);
 	if (!in_file)
 	{
-		cout << "\nI will create a file located at: " << file_path << "\n"
-			<< "this is where we will keep our scores!\n";
 		// initiate file to 0
 		override_file(file_path, 0);
 	}
