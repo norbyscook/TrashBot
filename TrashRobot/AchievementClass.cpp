@@ -46,7 +46,7 @@ void Achievements_cl::update_status(uint32_t score)
 		{
 			if (element.status == false) 
 			{
-				cout << "!!! you have obtained a new achievement !!!\n"; 
+				cout << "\n!!! you have obtained a new achievement !!!\n\n"; 
 			}
 			element.status = true;
 		}
@@ -88,7 +88,7 @@ string Achievements_cl::get_obtained()
 	}
 	if (obtained.size() < 1)
 	{
-		cout << "no achievement yet! we need more scores!\n";
+		cout << "no achievement yet! we need more scores!\n\n";
 	}
 	return obtained;
 }
