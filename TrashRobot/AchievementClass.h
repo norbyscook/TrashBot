@@ -15,9 +15,6 @@ struct achieve
 class Achievements_cl
 {
 public:
-
-	vector<achieve> achievements;
-
 	// loads achievement from file into vector
 	void load(string);
 	// update status of achievement in vector
@@ -28,6 +25,8 @@ public:
 	void update_file(string);
 
 private:
+	vector<achieve> loaded_achievements;
+
 	// achievements loading functions ----------------------------------------
 
 	// extract a line of the csv file

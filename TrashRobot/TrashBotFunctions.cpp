@@ -155,7 +155,8 @@ string get_ascii_art(const string file_path)
 uint32_t limited_add(uint32_t addend_one, uint32_t addend_two)
 {
 	constexpr uint32_t limit = std::numeric_limits<uint32_t>::max();
-	return limit - addend_one > addend_two ? addend_one + addend_two : limit;
+	if (limit - addend_one > addend_two) { return addend_one + addend_two; }
+	else { return limit; }
 }
 
 uint32_t limited_multiply(uint32_t multiplicand, uint32_t multiplier)

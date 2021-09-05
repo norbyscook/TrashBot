@@ -6,7 +6,7 @@ void Achievements_cl::load(string file_path)
 {
 	ifstream in_file(file_path);
 	if (!in_file) { cout << "I can't find achievement log file! in" << file_path << "\n"; }
-	else { achievements = extract_line(in_file); }
+	else { loaded_achievements = extract_line(in_file); }
 	in_file.close();
 }
 
@@ -39,7 +39,7 @@ void Achievements_cl::extract_cell(std::string line, std::vector<achieve>& vect)
 
 void Achievements_cl::update_status(uint32_t score)
 {
-	for (achieve& element : achievements)
+	for (achieve& element : loaded_achievements)
 	{
 		if (element.status == false) { set_achievement(element, score); }
 	}
@@ -68,7 +68,7 @@ void Achievements_cl::update_file(string file_path)
 void Achievements_cl::write_to_file(ostream& out_file)
 {
 	out_file << "score, path, status\n";
-	for (auto element : achievements)
+	for (auto element : loaded_achievements)
 	{
 		out_file << element.score_requirement << ",";
 		out_file << element.file_path << ",";
@@ -80,7 +80,7 @@ void Achievements_cl::write_to_file(ostream& out_file)
 string Achievements_cl::get_obtained()
 {
 	string obtained = { "" };
-	for (auto element : achievements)
+	for (auto element : loaded_achievements)
 	{
 		if (element.status == true)
 		{
