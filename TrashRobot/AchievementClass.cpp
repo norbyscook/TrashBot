@@ -2,7 +2,7 @@
 
 // achievements loading functions ----------------------------------------
 
-void Achievements_cl::load_achievements(string file_path)
+void Achievements_cl::load(string file_path)
 {
 	ifstream in_file(file_path);
 	if (!in_file) { cout << "I can't find achievement log file! in" << file_path << "\n"; }
@@ -38,7 +38,7 @@ void Achievements_cl::extract_cell(std::string line, std::vector<achieve>& vect)
 
 // data structure functions ----------------------------------------
 
-void Achievements_cl::update_achievements_status(uint32_t score)
+void Achievements_cl::update_status(uint32_t score)
 {
 	for (auto& element : achievements)
 	{
@@ -70,4 +70,22 @@ void Achievements_cl::write_to_file(ostream& out_file)
 		out_file << element.file_path << ",";
 		out_file << element.status << "\n";
 	}
+}
+
+// view achievement functions ----------------------------------------
+string Achievements_cl::get_obtained()
+{
+	string obtained = { "" };
+	for (auto element : achievements)
+	{
+		if (element.status == true)
+		{
+			obtained += get_ascii_art(element.file_path) + "\n\n";
+		}
+	}
+	if (obtained.size() < 1)
+	{
+		cout << "no achievement yet! we need more scores!\n";
+	}
+	return obtained;
 }

@@ -35,7 +35,7 @@ bool is_int_str(string input);
 void override_file(const string, uint32_t);
 uint32_t get_file_score(const string);
 
-// robot ascii art ------------------------------
+// ascii art functions ------------------------------
 
 string get_ascii_art(const string);
 

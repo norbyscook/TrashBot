@@ -129,7 +129,7 @@ uint32_t get_file_score(const string file_path)
 	return file_score;
 }
 
-// ascii art funcions ------------------------------------------
+// ascii art functions ------------------------------------------
 
 string get_ascii_art(const string file_path)
 {

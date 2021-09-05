@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "TrashBotFunctions.h"
+
 
 using std::ifstream;
 using std::ofstream;
@@ -28,11 +30,13 @@ public:
 	vector<achieve> achievements;
 
 	// loads achievement into vector
-	void load_achievements(string);
+	void load(string);
 	// update status of achievement in vector
-	void update_achievements_status(uint32_t score);
+	void update_status(uint32_t score);
 	// write updated achievements to file
 	void write_achievements_status_to_file(string);
+	// view achievements
+	string get_obtained();
 
 private:
 	// achievements loading functions ----------------------------------------
