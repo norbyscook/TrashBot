@@ -23,7 +23,7 @@ public:
 	void update_status(uint32_t score);
 	// write updated achievements to file
 	void update_file(string);
-	// view achievements
+	// get obtained achievements
 	string get_obtained();
 
 private:

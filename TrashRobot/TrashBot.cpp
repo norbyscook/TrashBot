@@ -7,10 +7,6 @@
 
 int main()
 {
-	constexpr char achievement_file_path[] = "Assets/AchievementsLog.csv";
-	Achievements_cl achievements;
-	achievements.load(achievement_file_path);
-
 	constexpr char trash_art_file_path[] = "Assets/TrashBotArt.txt";
 	cout << "Hello! I am trash collector bot!\n"
 		<< "Lets build a better future together by eliminating them trashes!\n"
@@ -20,6 +16,11 @@ int main()
 		<< "There are two achievements you can get based on the number of scores we got!\n\n";
 
 	constexpr char score_file_path[] = "Assets/Scores.txt";
+
+	constexpr char achievement_file_path[] = "Assets/AchievementsLog.csv";
+	Achievements_cl achievements;
+	achievements.load(achievement_file_path);
+
 	while (true)
 	{
 		cout << "enter a number to record the number of trash you put away today\n"
@@ -32,6 +33,7 @@ int main()
 		{
 			uint32_t new_score = calculate_new_score(stoul(input), score_file_path);
 			update_file_score(new_score, score_file_path);
+			
 			achievements.update_status(new_score);
 			achievements.update_file(achievement_file_path);
 		}
