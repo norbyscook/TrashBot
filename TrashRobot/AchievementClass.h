@@ -1,21 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include <sstream>
 #include "TrashBotFunctions.h"
+#include <vector>
 
-
-using std::ifstream;
-using std::ofstream;
 using std::vector;
-using std::string;
-using std::cout;
 using std::istream;
 using std::ostream;
-using std::getline;
-using std::stringstream;
-using std::stoul;
 
 struct achieve
 {
