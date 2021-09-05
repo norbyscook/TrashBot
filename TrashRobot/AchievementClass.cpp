@@ -12,7 +12,6 @@ void Achievements_cl::load(string file_path)
 
 vector<achieve> Achievements_cl::extract_line(istream& in_file)
 {
-	
 	vector<achieve> vect;
 	string line = { "" };
 	getline(in_file, line);
@@ -40,16 +39,18 @@ void Achievements_cl::extract_cell(std::string line, std::vector<achieve>& vect)
 
 void Achievements_cl::update_status(uint32_t score)
 {
-	for (auto& element : achievements)
+	for (achieve& element : achievements)
 	{
-		if (score >= element.score_requirement)
-		{
-			if (element.status == false) 
-			{
-				cout << "\n!!! you have obtained a new achievement !!!\n\n"; 
-			}
-			element.status = true;
-		}
+		if (element.status == false) { set_achievement(element, score); }
+	}
+}
+
+void Achievements_cl::set_achievement(achieve& element, uint32_t score)
+{
+	if (score >= element.score_requirement)
+	{
+		cout << "\n!!! you have obtained a new achievement !!!\n\n";
+		element.status = true;
 	}
 }
 

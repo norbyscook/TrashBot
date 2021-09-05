@@ -34,7 +34,13 @@ private:
 	// extract cells of the line and place it into achievement vector
 	void extract_cell(std::string, std::vector<achieve>&);
 
+	// update status functions ----------------------------------------
+
+	// set achievement status if requirement is met
+	void set_achievement(achieve&, uint32_t);
+	
 	// file write functions  ----------------------------------------
 
 	void write_to_file(ostream& out_file);
 };
+
