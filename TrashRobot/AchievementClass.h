@@ -19,26 +19,30 @@ struct achieve
 {
 	uint32_t score_requirement = 0;
 	string file_path = "";
-	bool obtained = false;
+	bool status = false;
 };
 
 class Achievements_cl
 {
 public:
 	vector<achieve> achievements;
-	// loads achievement into member vector
+
+	// loads achievement into vector
 	void load_achievements(string);
-	// update status achievement in vector
+	// update status of achievement in vector
 	void update_achievements_status(uint32_t score);
 	// write updated achievements to file
 	void write_achievements_status_to_file(string);
 
 private:
-	// loading functions 
+	// achievements loading functions ----------------------------------------
 
 	// extract a line of the csv file
 	vector<achieve> extract_line(istream&);
 	// extract cells of the line and place it into achievement vector
 	void extract_cell(std::string, std::vector<achieve>&);
+
+	// file write functions  ----------------------------------------
+
 	void write_to_file(ostream& out_file);
 };

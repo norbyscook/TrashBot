@@ -45,7 +45,7 @@ void Achievements_cl::update_achievements_status(uint32_t score)
 		if (score >= element.score_requirement)
 		{
 			cout << "!!! you have obtained a new achievement !!!\n";
-			element.obtained = true;
+			element.status = true;
 		}
 	}
 }
@@ -68,6 +68,6 @@ void Achievements_cl::write_to_file(ostream& out_file)
 	{
 		out_file << element.score_requirement << ",";
 		out_file << element.file_path << ",";
-		out_file << element.obtained << "\n";
+		out_file << element.status << "\n";
 	}
 }

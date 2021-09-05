@@ -129,7 +129,7 @@ uint32_t get_file_score(const string file_path)
 	return file_score;
 }
 
-// robot ascii art ------------------------------------------
+// ascii art funcions ------------------------------------------
 
 string get_ascii_art(const string file_path)
 {
@@ -137,7 +137,7 @@ string get_ascii_art(const string file_path)
 	string output = "";
 	if (!in_file)
 	{
-		cout << "I can't find robot art file! in" << file_path << "\n";
+		cout << "I can't find ascii art file! in" << file_path << "\n";
 	}
 	else
 	{
