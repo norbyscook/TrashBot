@@ -76,7 +76,7 @@ string string_input()
 
 bool valid_score_input(string input)
 {
-	if (is_int_str(input))
+	if (positive_int_str(input))
 	{
 		return is_intended_score(stoul(input));
 	}
@@ -95,8 +95,13 @@ bool is_intended_score(uint32_t input)
 
 // data type check functions ------------------------------------------
 
-bool is_int_str(string input)
+bool positive_int_str(string input)
 {
+	if (input[0] == '-')
+	{ 
+		cout << "positve numbers please!\n";
+		return false; 
+	}
 	stringstream chk_stream(input);
 	uint32_t num = 0;
 	return bool(chk_stream >> num);

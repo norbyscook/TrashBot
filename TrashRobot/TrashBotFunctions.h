@@ -11,6 +11,7 @@ using std::string;
 using std::stringstream;
 using std::stoul;
 using std::getline;
+using std::isdigit;
 
 // main score functions ------------------------------
 
@@ -27,7 +28,7 @@ bool is_intended_score(uint32_t);
 
 // data type check functions ------------------------------
 
-bool is_int_str(string input);
+bool positive_int_str(string input);
 
 // score file functions ------------------------------
 
