@@ -5,8 +5,6 @@ using std::vector;
 using std::istream;
 using std::ostream;
 
-
-
 class Achievements_cl
 {
 private:
