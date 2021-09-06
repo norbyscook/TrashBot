@@ -27,7 +27,7 @@ int main()
 			<< "enter 'score' to display current score\n"
 			<< "ender 'a' to view our achievements!\n"
 			<< "enter 'e' to end program\n\n";
-
+		
 		string input = string_input();
 		if (valid_score_input(input))
 		{

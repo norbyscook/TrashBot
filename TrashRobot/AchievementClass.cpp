@@ -10,7 +10,7 @@ void Achievements_cl::load(string file_path)
 	in_file.close();
 }
 
-vector<achieve> Achievements_cl::extract_line(istream& in_file)
+vector<Achievements_cl::achieve> Achievements_cl::extract_line(istream& in_file)
 {
 	vector<achieve> vect;
 	string line = { "" };
