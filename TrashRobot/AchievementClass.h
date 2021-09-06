@@ -5,8 +5,6 @@ using std::vector;
 using std::istream;
 using std::ostream;
 
-
-
 class Achievements_cl
 {
 private:
@@ -33,6 +31,7 @@ private:
 		}
 		return vect;
 	}
+
 	// extract cells of the line and place it into achievement vector
 	void extract_cell(std::string line, std::vector<achieve>& vect)
 	{
@@ -81,6 +80,7 @@ public:
 		else { loaded_achievements = extract_line(in_file); }
 		in_file.close();
 	}
+
 	// update status of achievement in vector
 	void update_status(uint32_t score)
 	{
@@ -117,7 +117,5 @@ public:
 		else { write_to_file(out_file); }
 		out_file.close();
 	}
-
-
 };
 
