@@ -22,7 +22,7 @@ vector<Achievements_cl::achieve> Achievements_cl::extract_line(istream& in_file)
 	return vect;
 }
 
-void Achievements_cl::extract_cell(std::string line, std::vector<achieve>& vect)
+void Achievements_cl::extract_cell(string line, vector<achieve>& vect)
 {
 	vector<string> line_elements(3);
 	stringstream line_stream(line);

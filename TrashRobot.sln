@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "strtoul", "strtoul\strtoul.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "string_to_int_check_v2", "string_to_int_check_v2\string_to_int_check_v2.vcxproj", "{2317AF3D-E3E9-4237-B741-E70F63CB85CF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "C++Classes", "C++Classes\C++Classes.vcxproj", "{FC1E143D-BE24-4B90-875F-FE185D5D6E98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{2317AF3D-E3E9-4237-B741-E70F63CB85CF}.Release|x64.Build.0 = Release|x64
 		{2317AF3D-E3E9-4237-B741-E70F63CB85CF}.Release|x86.ActiveCfg = Release|Win32
 		{2317AF3D-E3E9-4237-B741-E70F63CB85CF}.Release|x86.Build.0 = Release|Win32
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Debug|x64.ActiveCfg = Debug|x64
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Debug|x64.Build.0 = Debug|x64
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Debug|x86.ActiveCfg = Debug|Win32
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Debug|x86.Build.0 = Debug|Win32
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Release|x64.ActiveCfg = Release|x64
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Release|x64.Build.0 = Release|x64
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Release|x86.ActiveCfg = Release|Win32
+		{FC1E143D-BE24-4B90-875F-FE185D5D6E98}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

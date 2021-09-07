@@ -20,7 +20,7 @@ private:
 	// extract a line of the csv file
 	vector<achieve> extract_line(istream& in_file);
 	// extract cells of the line and place it into achievement vector
-	void extract_cell(std::string line, std::vector<achieve>& vect);
+	void extract_cell(string line, vector<achieve>& vect);
 
 	// set achievement status if requirement is met
 	void set_achievement(achieve&, uint32_t);
