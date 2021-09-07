@@ -6,23 +6,23 @@ void Achievements_cl::load(string file_path)
 {
 	ifstream in_file(file_path);
 	if (!in_file) { cout << "I can't find achievement log file! in" << file_path << "\n"; }
-	else { loaded_achievements = extract_line(in_file); }
+	else { loaded_achievements = extract_lines(in_file); }
 	in_file.close();
 }
 
-vector<Achievements_cl::achieve> Achievements_cl::extract_line(istream& in_file)
+vector<Achievements_cl::achieve> Achievements_cl::extract_lines(istream& in_file)
 {
 	vector<achieve> vect;
 	string line = { "" };
 	getline(in_file, line);
 	while (getline(in_file, line))
 	{
-		extract_cell(line, vect);
+		extract_cells(line, vect);
 	}
 	return vect;
 }
 
-void Achievements_cl::extract_cell(string line, vector<achieve>& vect)
+void Achievements_cl::extract_cells(string line, vector<achieve>& vect)
 {
 	vector<string> line_elements(3);
 	stringstream line_stream(line);
