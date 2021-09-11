@@ -1,5 +1,5 @@
 # TrashBot
-Made for One Lone Coder Jam
+Made for One Lone Coder Jam.\
 The main code is in TrashRobot folder, the other folders are text codes.
 ## source code insperations: 
     https://stackoverflow.com/questions/427477/fastest-way-to-clamp-a-real-fixed-floating-point-value
