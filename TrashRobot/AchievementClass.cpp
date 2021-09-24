@@ -32,7 +32,7 @@ void Achievements_cl::extract_cells(string line, vector<achieve>& vect)
 		try { line_elements.at(i) = cell; }
 		catch (std::out_of_range oor) { cout << oor.what() << "\n"; }
 	}
-	vect.push_back({ stoul(line_elements[0]), line_elements[1], bool(stoul(line_elements[2])) });
+	vect.push_back({ uint32_t(stoul(line_elements[0])), line_elements[1], bool(stoul(line_elements[2])) });
 }
 
 // status update functions ----------------------------------------
