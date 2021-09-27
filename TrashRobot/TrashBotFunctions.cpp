@@ -151,8 +151,8 @@ string get_ascii_art(const string file_path)
 			output += line + "\n";
 		}
 	}
-	return output;
 	in_file.close();
+	return output;
 }
 
 // math functions ------------------------------------
